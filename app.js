@@ -19,7 +19,14 @@ var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://ryan:todayisthe92@cluster0-yozy2.mongodb.net/test?retryWrites=true&w=majority", { 
+    useNewUrlParser: true, userCreateIndex: true 
+    
+}).then(() =>{
+    console.log("Connected to DB!");
+}).catch(err => {
+    console.log("Error:", err.message);
+});
 
 //authentication - checks if someone is who they say they are
 //authorization - once we know who they are, what permissions do they have
