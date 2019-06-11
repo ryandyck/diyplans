@@ -19,7 +19,7 @@ var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
 
-mongoose.connect("mongodb+srv://ryan:todayisthe92@cluster0-yozy2.mongodb.net/test?retryWrites=true&w=majority", { 
+mongoose.connect("mongodb+srv://ryan:dyck@cluster0-yozy2.mongodb.net/test?retryWrites=true&w=majority", { 
     useNewUrlParser: true, userCreateIndex: true 
     
 }).then(() =>{
