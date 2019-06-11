@@ -19,14 +19,18 @@ var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
 
+
+//var url = process.env.databaseURL || //use this environment variable to connect to different databases  NOT USED RIGHT NOW SET UP AFTER MOVING OVER
+
 mongoose.connect("mongodb+srv://ryan:dyck@cluster0-yozy2.mongodb.net/test?retryWrites=true&w=majority", { 
     useNewUrlParser: true, userCreateIndex: true 
-    
 }).then(() =>{
     console.log("Connected to DB!");
 }).catch(err => {
     console.log("Error:", err.message);
 });
+
+
 
 //authentication - checks if someone is who they say they are
 //authorization - once we know who they are, what permissions do they have
