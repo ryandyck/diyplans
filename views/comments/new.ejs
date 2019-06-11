@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Add New Comment to <%= campground.name %></h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <!-- form with the /campgrounds POST route -->
+            <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+                <!-- used for grouping and adds space -->
+                <div class="form-group">
+                <!--text input, that sets the variable image, with background text being image url -->
+                    <input class="form-control" type="text" name="comment[text]" placeholder="text">
+                </div>
+               <!--v class="form-group">
+                    <input class="form-control" type="text" name="comment[author]" placeholder="author">
+                </div>-->
+                <div class="form-group">
+                    <button class="brn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/campgrounds">Back to Campgrounds</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>
