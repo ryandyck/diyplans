@@ -19,6 +19,9 @@ var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
 
+const host_ip = '127.0.0.1';
+const port = 3000;
+
 
 //var url = process.env.databaseURL || //use this environment variable to connect to different databases  NOT USED RIGHT NOW SET UP AFTER MOVING OVER
 
@@ -79,8 +82,11 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 
 
 
-
-app.listen(process.env.PORT, process.env.IP, function(){
+//old cloud9 port and host
+/*app.listen(process.env.PORT, process.env.IP, function(){
+    console.log("server started");
+});*/
+app.listen(port, host_ip, () => {
     console.log("server started");
 });
 
