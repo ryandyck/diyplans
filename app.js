@@ -7,7 +7,8 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var flash = require("connect-flash");
 var methodOverride = require("method-override");
-var Campground = require("./models/campground");
+//var Campground = require("./models/campground");
+var Plan = require("./models/plan");
 var Comment = require("./models/comment");
 var User = require("./models/user");
 var seedDB = require("./seeds");
@@ -15,7 +16,8 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 
 var commentRoutes = require("./routes/comments");
-var campgroundRoutes = require("./routes/campgrounds");
+//var campgroundRoutes = require("./routes/campgrounds");
+var planRoutes = require("./routes/plans")
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
 
@@ -75,8 +77,8 @@ app.get("/", function(req, res){
 
 //tells app to use these
 app.use(indexRoutes);
-app.use("/campgrounds",campgroundRoutes);  //all routes start with /campgrounds
-app.use("/campgrounds/:id/comments",commentRoutes);
+app.use("/plans", planRoutes);  //all routes start with /plans
+app.use("/plans/:id/comments",commentRoutes);
 
 
 

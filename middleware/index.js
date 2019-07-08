@@ -1,21 +1,22 @@
-var Campground = require("../models/campground");
+//var Campground = require("../models/campground");
+var Plan = require("../models/plan");
 var Comment = require("../models/comment");
 
 //all the middleware goes here
 var middlewareObj = {};
 
-middlewareObj.checkCampgroundOwnership = function(req, res, next){
+middlewareObj.checkPlanOwnership = function(req, res, next){
     //is user logged in
     if(req.isAuthenticated()){
-        Campground.findById(req.params.id, function(err, foundCampground){
-        if(err || !foundCampground){
-            req.flash("error", "Campground not found");
+        Plan.findById(req.params.id, function(err, foundPlan){
+        if(err || !foundPlan){
+            req.flash("error", "Plan not found");
             res.redirect("back");
         }
         else{
-            //does user own the campground?
+            //does user own the plan?
             //author.id is a mongoose obj, ._id is a string so need to use a special mongoose method
-            if(foundCampground.author.id.equals(req.user._id)){
+            if(foundPlan.author.id.equals(req.user._id)){
                 next(); //move on to the next code in the callback
             }
             else{

@@ -2,10 +2,10 @@
 
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;">Add New Comment to <%= campground.name %></h1>
+        <h1 style="text-align: center;">Add New Comment to <%= plan.name %></h1>
         <div style="width: 30%; margin: 25px auto;">
-            <!-- form with the /campgrounds POST route -->
-            <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+            <!-- form with the /plans POST route -->
+            <form action="/plans/<%= plan._id %>/comments" method="POST">
                 <!-- used for grouping and adds space -->
                 <div class="form-group">
                 <!--text input, that sets the variable image, with background text being image url -->
@@ -18,7 +18,7 @@
                     <button class="brn btn-lg btn-primary btn-block">Submit!</button>
                 </div>
             </form>
-            <a href="/campgrounds">Back to Campgrounds</a>
+            <a href="/plans">Back to Plans</a>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-var express = require("express");
+/*var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 //if you just require a folder, it will require the file named index, so index.js in this is optional
@@ -111,4 +111,4 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
     });
 });
 
-module.exports = router;
+module.exports = router;*/
