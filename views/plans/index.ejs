@@ -1,7 +1,5 @@
 <% include ../partials/header %>
 
-
-
 <!-- adds some spacing on the sides -->
 <div class="container">
 
@@ -18,18 +16,16 @@
         </div>
     </header>
 
-    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <div class="row text-center">
         <% plans.forEach(function(i){ %>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <!-- want to display the plans image string into the src sothat it will display the image -->
-                    <img src="<%= i.image %>">
-                    <div class="caption">
-                        <h4><%= i.name %></h4>
-                    </div>
-                    <p>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <img src="<%= i.image %>" class="card-img-top" alt="<%= i.name %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= i.name %></h5>
+                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
                         <a href="/plans/<%= i._id %>" class="btn btn-primary">More Info</a>
-                    </p>
+                    </div>
                 </div>
             </div>
         <% }); %>

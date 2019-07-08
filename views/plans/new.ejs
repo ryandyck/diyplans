@@ -1,9 +1,12 @@
 <% include ../partials/header %>
 
-<div class="container">
-    <div class="row">
-        <h1 style="text-align: center;">Create a New Plan</h1>
-        <div style="width: 30%; margin: 25px auto;">
+<!--<div class="container">-->
+<div class="row justify-content-center">
+    <div class="col-md-12 text-center">
+        <h1>Create a New Plan</h1>
+    </div>
+        <!--<div style="width: 30%; margin: 25px auto;">-->
+    <div class="col-4 col-xs-12">
             <!-- form with the /plans POST route -->
             <form action="/plans" method="POST">
                 <!-- used for grouping and adds space -->
@@ -27,5 +30,6 @@
             <a href="/plans">Back to Plans</a>
         </div>
     </div>
-</div>
+
+<!--</div>-->
 <% include ../partials/footer %>
