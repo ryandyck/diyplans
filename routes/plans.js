@@ -4,6 +4,30 @@ var Plan = require("../models/plan");
 //if you just require a folder, it will require the file named index, so index.js in this is optional
 var middleware = require("../middleware/index.js");
 
+//image upload config///////////////////////////////////////
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'dknaropet', //dotenv is not working
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+///////////////////////////////////////////////////////////
+
 //INDEX ROUTE
 //REST convention - this is where the data is displayed
 router.get("/", function(req, res){
@@ -42,9 +66,27 @@ router.get("/", function(req, res){
 
 //CREATE ROUTE
 //for REST convention, this should match the get of where the forms post data is displayed
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
+    cloudinary.uploader.upload(req.file.path, function(result) {
+        // add cloudinary url for the image to the plan object under image property
+        req.body.plan.image = result.secure_url;
+        // add author to plan
+        req.body.plan.author = {
+          id: req.user._id,
+          username: req.user.username
+        }
+        Plan.create(req.body.plan, function(err, plan) {
+          if (err) {
+            req.flash('error', err.message);
+            return res.redirect('back');
+          }
+          res.redirect('/plans/' + plan.id);
+        });
+    });
+
+//router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form and add to plans
-    var name = req.body.name;
+    /*var name = req.body.name;
     var drawing = req.body.drawing;
     var image = req.body.image;
     var desc = req.body.description;
@@ -65,7 +107,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(newlyCreatedPlan);
             res.redirect("/plans");
         }
-    });
+    });*/
     
 });
 

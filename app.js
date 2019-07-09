@@ -3,6 +3,8 @@
 
 var express = require("express");
 var app = express();  //to use express
+
+var dotEnv = require('dotenv').config();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var flash = require("connect-flash");
@@ -20,6 +22,7 @@ var commentRoutes = require("./routes/comments");
 var planRoutes = require("./routes/plans")
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
+
 
 const host_ip = '127.0.0.1';
 const port = 3000;
@@ -119,7 +122,7 @@ Campground location with Google Maps (DONT NEED)
 
 Campground cost  (DONT NEED) 
 
-Footer (DO THIS)
+Footer (MAYBE DO THIS)
 
 Home link in navigation (DONT WANT)
 
@@ -199,3 +202,29 @@ Thanks,
 Ian*/
 
 /*git -- init creates the repo, starting at the folder you are in*/
+
+
+
+//DOCUMENTATION
+
+//MEN stack - Mongo, express, node (uses ejs so not a mean or mern stack)
+  
+
+//MongoDB Atlas is hosting the database
+
+//mongoose for mongodb interfacing
+
+//multer and cloudinary for image upload
+//NOTE: Cloudinary has services for image filtering to remove nsfw images etc. USE THIS
+
+//passport and passport-local for user authentication
+
+
+
+
+//more of the details:
+
+//body-parser for http req parsing
+//flash for pop up notifcations ie: username already exists etc.
+//dotenv for environment variables - useful for hiding information
+
