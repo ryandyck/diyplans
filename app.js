@@ -113,31 +113,31 @@ I've been working on some additional features for the YelpCamp project. You can 
 
 CSS3 background animation on landing page 
 
-Fuzzy Search 
+Fuzzy Search (DONE)
 
-Campground location with Google Maps
+Campground location with Google Maps (DONT NEED)
 
-Campground cost 
+Campground cost  (DONT NEED) 
 
-Footer 
+Footer (DO THIS)
 
-Home link in navigation 
+Home link in navigation (DONT WANT)
 
-Authentication flash messages 
+Authentication flash messages (MAYBE DO THIS)
 
-Display time since post was created with Moment JS 
+Display time since post was created with Moment JS (DO THIS)
 
-User profile 
+User profile (DO THIS)
 
-Password reset 
+Password reset (DO THIS)
 
-Image upload with multer and cloudinary 
+Image upload with multer and cloudinary (DO THIS)
 
-Migration/upgrade instructions for Bootstrap 4
+Migration/upgrade instructions for Bootstrap 4 (DONE)
 
-Refactor callbacks with Async/Await
+Refactor callbacks with Async/Await (DO THIS)
 
-In-app notifications
+In-app notifications (WHAT IS THIS)
 
 *See below for all tutorial links as well as additional tutorials provided by Zarko
 

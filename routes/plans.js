@@ -7,18 +7,37 @@ var middleware = require("../middleware/index.js");
 //INDEX ROUTE
 //REST convention - this is where the data is displayed
 router.get("/", function(req, res){
-
-    
-    //get all plans from db
-    Plan.find({}, function(err, allPlans){
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.render("plans/index", {plans: allPlans});
-        }
-    });
-    
+    var noMatch;
+    //if a search was entered
+    if(req.query.search){
+        //variable regex (regular expression)
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        //search for names that match the fuzzy search from the regex and only display them
+        Plan.find({name: regex}, function(err, allPlans){
+            if(err){
+                console.log(err);
+            }
+            else{
+                if(allPlans.length < 1){
+                    noMatch = "No plans were found";
+                }
+                res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+            }
+        });
+    }
+    else{
+        //eval(require('locus'));
+        //otherwise get all plans and display
+        //get all plans from db
+        Plan.find({}, function(err, allPlans){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE ROUTE
@@ -110,5 +129,10 @@ router.delete("/:id", middleware.checkPlanOwnership, function(req, res){
         }
     });
 });
+
+//match any characters globallys
+function escapeRegex(text){
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
