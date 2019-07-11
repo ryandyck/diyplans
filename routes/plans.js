@@ -67,9 +67,15 @@ router.get("/", function(req, res){
 //CREATE ROUTE
 //for REST convention, this should match the get of where the forms post data is displayed
 router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
-    cloudinary.uploader.upload(req.file.path, function(result) {
+    cloudinary.v2.uploader.upload(req.file.path, function(err, result) {
+        if(err){
+            req.flash('error', err.message);
+            return res.redirect('back');
+        }
         // add cloudinary url for the image to the plan object under image property
         req.body.plan.image = result.secure_url;
+        //add image's public_id to plan object
+        req.body.plan.imageId = result.public_id;
         // add author to plan
         req.body.plan.author = {
           id: req.user._id,
@@ -83,32 +89,6 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
           res.redirect('/plans/' + plan.id);
         });
     });
-
-//router.post("/", middleware.isLoggedIn, function(req, res){
-    //get data from form and add to plans
-    /*var name = req.body.name;
-    var drawing = req.body.drawing;
-    var image = req.body.image;
-    var desc = req.body.description;
-    var author = {
-        id: req.user._id,
-        username: req.user.username
-    }
-    var newPlan = {name: name, drawing: drawing, image: image, description: desc, author: author};
-    
-    //Create a new plan and save to database
-    Plan.create(newPlan, function(err, newlyCreatedPlan){
-        if(err){
-            console.log(err);
-        }
-        else{
-            //redirect back to updated plans page
-            //When redirecting, default is to redirect as a get request, so wont go to another with same name with post route
-            console.log(newlyCreatedPlan);
-            res.redirect("/plans");
-        }
-    });*/
-    
 });
 
 //NEW ROUTE
@@ -144,30 +124,53 @@ router.get("/:id/edit", middleware.checkPlanOwnership, function(req, res){
 });
 
 //update plan route
-router.put("/:id", middleware.checkPlanOwnership, function(req, res){
+router.put("/:id", middleware.checkPlanOwnership, upload.single('image'), function(req, res){
     //find and update the correct plan
-    Plan.findByIdAndUpdate(req.params.id, req.body.plan, function(err, updatedPlan){
+    Plan.findById(req.params.id, async function(err, plan){
         if(err){
-            res.redirect("/plans");
+            req.flash("error", err.message);
+            res.redirect("back");
         }
         else{
+            if(req.file){
+                try{
+                    await cloudinary.v2.uploader.destroy(plan.imageId);
+                    var result = await cloudinary.v2.uploader.upload(req.file.path);
+                    plan.imageId = result.public_id;
+                    plan.image = result.secure_url;
+                }catch(err){
+                    req.flash("error", err.message);
+                    return res.redirect("back");
+                }
+            }
+            //will either update with old values or new updated values
+            plan.name = req.body.name;
+            plan.description = req.body.description;
+            plan.save(); // saves the plan in the database (updates it)
+            req.flash("success", "Updated Plan");
             //redirect somewhere
             res.redirect("/plans/" + req.params.id);
         }
     });
-
 });
 
 //destroy plan route
-router.delete("/:id", middleware.checkPlanOwnership, function(req, res){
-    Plan.findByIdAndRemove(req.params.id, function(err){
+router.delete("/:id", middleware.checkPlanOwnership, async function(req, res){
+    //TODO once deleting is working, delete the comments from the database as well
+
+    Plan.findById(req.params.id, async function(err, plan){
         if(err){
-            res.redirect("/plans");
-            console.log("delete error");
+            req.flash("error", err.message);
+            return res.redirect("back");  
         }
-        else{
-            req.flash("success", "Plan deleted");
-            res.redirect("/plans");
+        try{
+            await cloudinary.v2.uploader.destroy(plan.imageId); //delete image from cloudinary
+            plan.remove();  //delete from database
+            req.flash("success", "plan deleted");
+            res.redirect('/plans');
+        }catch(err){
+            req.flash("error", err.message);
+            return res.redirect("back");  
         }
     });
 });

@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var planSchema = new mongoose.Schema({
    name: String,
    image: String,
+   imageId: String,
    type: String,  //woodwork, metal fab etc.
    drawing: String,
    description: String,
