@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= plan.name %></h5>
                     <p class="card-text"><%= plan.description %> </p>
-                    <p><em>Submitted By <%= plan.author.username %></em></p>
+                    <p><em>Submitted By <a href="/users/<%= plan.author.id %>"><%= plan.author.username %></a></em></p>
                     <% if(currentUser && plan.author.id.equals(currentUser._id)){%>  <!-- every route has currentUser (app.js), but have to check if null first -->
                     <a class="btn btn-warning" href="/plans/<%= plan._id %>/edit">Edit</a>
                     <form class="delete-form" action="/plans/<%= plan._id %>?_method=DELETE" method="POST">
