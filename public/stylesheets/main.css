@@ -13,3 +13,7 @@
 .delete-form{
     display: inline;
 }
+
+body {
+	padding-top: 50px;  /*navbar is default 50px wide, this offsets so it doesnt overlap*/
+}

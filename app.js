@@ -130,11 +130,11 @@ Authentication flash messages (MAYBE DO THIS)
 
 Display time since post was created with Moment JS (DO THIS)
 
-User profile (DO THIS)
+User profile (DONE)
 
-Password reset (DO THIS)
+Password reset (DONE)
 
-Image upload with multer and cloudinary (DO THIS)
+Image upload with multer and cloudinary (DONE)
 
 Migration/upgrade instructions for Bootstrap 4 (DONE)
 
