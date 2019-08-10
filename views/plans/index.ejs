@@ -1,29 +1,26 @@
 <% include ../partials/header %>
 
+<div class="jumbotron jumbotron-fluid">
+    <video preload autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+        <source src="images/23023897-preview.mp4" type="video/mp4">
+    </video>
+    <div class="container text-white">
+        <h1 class="display-4">DIY Plans</h1>
+        <p class="lead">Gunna build some sick stuff heck ya</p>
+        <hr class="my-4">
+        <p>Share some plans yo</p>
+        <a class="btn btn-primary btn-lg" href="/plans/new">Add New Plan</a>
+    </div>
+</div>
+
 <!-- adds some spacing on the sides -->
 <div class="container">
-
-    <!-- same as div really, just has a name for us to recognize -->
-    <header class="jumbotron">
-        <!-- more spacing -->
-        <div class="container">
-            <h1>DIYplans</h1>
-            <!--<p>View our hand-picked plans from all over the world</p>-->
-            <!-- p is for spacing to ensure button is on its own line -->
-            <p>
-                <a class="btn btn-primary btn-lg" href="/plans/new">Add New Plan</a>
-            </p>
-            <p>
-                <form action="/plans" method="GET" class="form-inline">
-                    <div class="form-group">
-                        <input type="text" name="search" placeholder="Plan search..." class="form-control">
-                        <input type="submit" value="search" class="btn btn-default">
-                    <div>
-                </form>
-            </p>
-        </div>
-    </header>
-
+    <form action="/plans" method="GET" class="">
+        <div class="form-group">
+            <input type="text" name="search" placeholder="Plan search..." class="form-control">
+            <input type="submit" value="search" class="btn btn-default">
+        <div>
+    </form>
     <div class="row text-center">
         <div class="col-md-12">
             <% if(noMatch !== undefined) { %>
@@ -44,5 +41,22 @@
         <% }); %>
     </div>
 </div>
+
+<!-- <script>
+function deferVideo() {
+
+    //defer html5 video loading
+  $("video source").each(function() {
+    var sourceFile = $(this).attr("data-src");
+    $(this).attr("src", sourceFile);
+    var video = this.parentElement;
+    video.load();
+    // uncomment if video is not autoplay
+    //video.play();
+  });
+
+}
+window.onload = deferVideo;
+</script> -->
 
 <% include ../partials/footer %>

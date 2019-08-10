@@ -74,7 +74,19 @@ app.use(function(req, res, next){
 });
 
 app.get("/", function(req, res){
-    res.render("landing");
+    //res.render("landing");
+        //eval(require('locus'));
+        //otherwise get all plans and display
+        //get all plans from db
+        Plan.find({}, function(err, allPlans){
+            if(err){
+                console.log(err);
+                //TODO add error page? -- like the nice google dinosaur one or something
+            }
+            else{
+                res.render("plans/index", {plans: allPlans, noMatch: undefined});
+            }
+        });
 });
 
 
