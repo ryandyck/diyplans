@@ -7,6 +7,7 @@ var planSchema = new mongoose.Schema({
    type: String,  //woodwork, metal fab etc.
    drawing: String,
    description: String,
+   createdAt: { type: Date, default: Date.now },
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,

@@ -14,6 +14,7 @@ var Plan = require("./models/plan");
 var Comment = require("./models/comment");
 var User = require("./models/user");
 var seedDB = require("./seeds");
+var moment = require('moment');
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
 
@@ -51,7 +52,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));   //this is that wierd method override that is required because of wierd routing
 app.use(flash());
 
-
+app.locals.moment = require("moment");
 //PASSPORT CONFIG
 app.use(require("express-session")({
     secret: "Rusty is a dank dog",
