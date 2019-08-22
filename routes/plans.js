@@ -27,17 +27,40 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 ///////////////////////////////////////////////////////////
+var filter;
 
+/////////////////
 //INDEX ROUTE
 //REST convention - this is where the data is displayed
 router.get("/", function(req, res){
     var noMatch;
-    //if a search was entered
+
+  /*  if(req.query.filter){
+        //variable regex (regular expression)
+        //const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        
+        const link_type = req.query.filter;
+        //search for names that match the fuzzy search from the regex and only display them
+        Plan.find({type: link_type}, function(err, allPlans){  //, type: link
+            if(err){
+                console.log(err);
+            }
+            else{
+                if(allPlans.length < 1){
+                    noMatch = "No plans were found";
+                }
+                res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+            }
+        });
+    }*/
+
     if(req.query.search){
         //variable regex (regular expression)
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        
+        //const link = req.query.type_link;
         //search for names that match the fuzzy search from the regex and only display them
-        Plan.find({name: regex}, function(err, allPlans){
+        Plan.find({name: regex}, function(err, allPlans){  //, type: link
             if(err){
                 console.log(err);
             }
@@ -66,12 +89,9 @@ router.get("/", function(req, res){
 
 //CREATE ROUTE
 //for REST convention, this should match the get of where the forms post data is displayed
-router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
-    cloudinary.v2.uploader.upload(req.file.path, function(err, result) {
-        if(err){
-            req.flash('error', err.message);
-            return res.redirect('back');
-        }
+router.post("/", middleware.isLoggedIn, upload.single('image'), async function(req, res) {
+    try{
+        var result1 = await cloudinary.v2.uploader.upload(req.file.path);
         // add cloudinary url for the image to the plan object under image property
         req.body.plan.image = result.secure_url;
         //add image's public_id to plan object
@@ -80,7 +100,8 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
         req.body.plan.author = {
           id: req.user._id,
           username: req.user.username
-        }
+        };
+
         Plan.create(req.body.plan, function(err, plan) {
           if (err) {
             req.flash('error', err.message);
@@ -88,7 +109,11 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
           }
           res.redirect('/plans/' + plan.id);
         });
-    });
+    }catch(err){
+        req.flash('error', err.message);
+        console.log("error uploading image");
+        return res.redirect('back');
+    }
 });
 
 //NEW ROUTE

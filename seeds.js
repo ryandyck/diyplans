@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Plan = require("./models/plan");
 var Comment   = require("./models/comment");
  
-var data = [
+/*var data = [
     {
         name: "Cloud's Rest", 
         image: "https://farm4.staticflickr.com/3795/10131087094_c1c0a1c859.jpg",
@@ -33,7 +33,7 @@ var data = [
             username: "Jane"
         }
     }
-]
+]*/
  
 function seedDB(){
    //Remove all database items
@@ -48,7 +48,7 @@ function seedDB(){
             }
             console.log("removed comments!");
              //add a few plans
-            data.forEach(function(seed){
+            /*data.forEach(function(seed){
                 Plan.create(seed, function(err, plan){
                     if(err){
                         console.log(err)
@@ -73,7 +73,7 @@ function seedDB(){
                             });
                     }
                 });
-            });
+            });*/
         });
     }); 
     //add a few comments
