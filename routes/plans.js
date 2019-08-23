@@ -172,7 +172,7 @@ router.get("/:id/edit", middleware.checkPlanOwnership, function(req, res){
 });
 
 //update plan route
-router.put("/:id", middleware.checkPlanOwnership, upload.single('image'), function(req, res){
+router.put("/:id", middleware.checkPlanOwnership, upload.fields([{name: 'image'}, {name: 'drawing'}]), function(req, res){
     //find and update the correct plan
     Plan.findById(req.params.id, async function(err, plan){
         if(err){
@@ -180,12 +180,23 @@ router.put("/:id", middleware.checkPlanOwnership, upload.single('image'), functi
             res.redirect("back");
         }
         else{
-            if(req.file){
+            if(req.files.image.length){
                 try{
                     await cloudinary.v2.uploader.destroy(plan.imageId);
-                    var result = await cloudinary.v2.uploader.upload(req.file.path);
-                    plan.imageId = result.public_id;
-                    plan.image = result.secure_url;
+                    var result1 = await cloudinary.v2.uploader.upload(req.files.image[0].path);
+                    plan.imageId = result1.public_id;
+                    plan.image = result1.secure_url;
+                }catch(err){
+                    req.flash("error", err.message);
+                    return res.redirect("back");
+                }
+            }
+            if(req.files.drawing.length){
+                try{
+                    await cloudinary.v2.uploader.destroy(plan.drawingId);
+                    var result2 = await cloudinary.v2.uploader.upload(req.files.drawing[0].path);
+                    plan.drawingId = result2.public_id;
+                    plan.drawing = result2.secure_url;
                 }catch(err){
                     req.flash("error", err.message);
                     return res.redirect("back");
@@ -213,7 +224,8 @@ router.delete("/:id", middleware.checkPlanOwnership, async function(req, res){
         }
         try{
             await cloudinary.v2.uploader.destroy(plan.imageId); //delete image from cloudinary
-            plan.remove();  //delete from database
+            await cloudinary.v2.uploader.destroy(plan.drawingId); //delete drawing from cloudinary
+            await plan.remove();  //delete from database
             req.flash("success", "plan deleted");
             res.redirect('/plans');
         }catch(err){
