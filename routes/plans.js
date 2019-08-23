@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
 });
 var imageFilter = function (req, file, cb) {
     // accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/i)) {
         return cb(new Error('Only image files are allowed!'), false);
     }
     cb(null, true);
@@ -87,33 +87,56 @@ router.get("/", function(req, res){
     }
 });
 
+
 //CREATE ROUTE
 //for REST convention, this should match the get of where the forms post data is displayed
-router.post("/", middleware.isLoggedIn, upload.single('image'), async function(req, res) {
-    try{
-        var result1 = await cloudinary.v2.uploader.upload(req.file.path);
-        // add cloudinary url for the image to the plan object under image property
-        req.body.plan.image = result.secure_url;
-        //add image's public_id to plan object
-        req.body.plan.imageId = result.public_id;
-        // add author to plan
-        req.body.plan.author = {
-          id: req.user._id,
-          username: req.user.username
-        };
+router.post("/", middleware.isLoggedIn, upload.fields([{name: 'image'}, {name: 'drawing'}]), async function(req, res) {
+    if(req.files.image.length) {
+        try{
+            var result1 = await cloudinary.v2.uploader.upload(req.files.image[0].path);
+            // add cloudinary url for the image to the plan object under image property
+            req.body.plan.image = result1.secure_url;
+            //add image's public_id to plan object
+            req.body.plan.imageId = result1.public_id;
+            // add author to plan
+            req.body.plan.author = {
+              id: req.user._id,
+              username: req.user.username
+            };
+        }catch(err){
+            req.flash('error', err.message);
+            console.log("error uploading image");
+            return res.redirect('back');
+        }
+    }
 
-        Plan.create(req.body.plan, function(err, plan) {
-          if (err) {
+    if(req.files.drawing.length) {
+        try{
+            var result2 = await cloudinary.v2.uploader.upload(req.files.drawing[0].path);
+            // add cloudinary url for the image to the plan object under image property
+            req.body.plan.drawing = result2.secure_url;
+            //add image's public_id to plan object
+            req.body.plan.drawingId = result2.public_id;
+            // add author to plan
+            req.body.plan.author = {
+              id: req.user._id,
+              username: req.user.username
+            };
+        }catch(err){
+            req.flash('error', err.message);
+            console.log("error uploading image");
+            return res.redirect('back');
+        } 
+    }
+
+    Plan.create(req.body.plan, function(err, plan) {
+        if (err) {
             req.flash('error', err.message);
             return res.redirect('back');
-          }
-          res.redirect('/plans/' + plan.id);
-        });
-    }catch(err){
-        req.flash('error', err.message);
-        console.log("error uploading image");
-        return res.redirect('back');
-    }
+        }
+        res.redirect('/plans/' + plan.id);
+    });
+
 });
 
 //NEW ROUTE

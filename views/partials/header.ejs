@@ -13,9 +13,37 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <!--<ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a href="/plans">Home</a></li>
-        </ul>-->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <form action="/plans" method="GET" class="">
+                    <!-- <input type="text" name="search" placeholder="Search..."> --> -->
+                    <!-- <a href="#" onclick="document.getElementById('search').submit();"><i class="fa fa-search"></i></a> -->
+                            <input type="submit" name="filter" value="fabrication" class="btn btn-default">
+                </form>
+                <!-- <a class="nav-link" href="/fabrication">Fabrication</a> -->
+                <!-- <input type="submit" class="nav-link" value="fabrication"> -->
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/machining">Machining</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/construction">Construction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/woodworking">Woodworking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/custom_projects">Custom Projects</a>
+            </li>
+        </ul>
+
+      <!--       <form action="/plans" method="GET" class="">
+        <div class="form-group">
+            <input type="text" name="search" placeholder="Plan search..." class="form-control">
+            <input type="submit" value="search" class="btn btn-default">
+        <div>
+    </form> -->
+
         <ul class="navbar-nav ml-auto">
             <% if(!currentUser){ %>
                 <li class="nav-item">

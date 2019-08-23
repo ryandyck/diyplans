@@ -13,6 +13,7 @@
             <div class="card mb-3">
                 <img src="<%= plan.image %>" class="card-img-top" alt="<%= plan.name %>">
                 <div class="card-body">
+                    <img src="<%= plan.drawing %>">
                     <h5 class="card-title"><%= plan.name %></h5>
                     <p class="card-text"><%= plan.description %> </p>
                     <p><em>Submitted By <a href="/users/<%= plan.author.id %>"><%= plan.author.username %></a><%= moment(plan.createdAt).fromNow() %></em></p>
