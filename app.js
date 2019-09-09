@@ -24,6 +24,8 @@ var planRoutes = require("./routes/plans")
 var indexRoutes = require("./routes/index");  //auth routes
 //seedDB();  //seed the database
 
+//RUN WITH --inspect to run debugger in chrome dev tools
+//THEN go to the page, click on the link and make sure it says debugger attached in the console
 
 const host_ip = '127.0.0.1';
 const port = 3000;

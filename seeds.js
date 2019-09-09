@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Plan = require("./models/plan");
 var Comment   = require("./models/comment");
+var User = require("./models/user");
  
 /*var data = [
     {
@@ -35,18 +36,26 @@ var Comment   = require("./models/comment");
     }
 ]*/
  
-function seedDB(){
-   //Remove all database items
-   Plan.remove({}, function(err){
-        if(err){
-            console.log(err);
-        }
+async function seedDB(){
+   try{
+        await Plan.remove({});
         console.log("removed items!");
-        Comment.remove({}, function(err) {
-            if(err){
-                console.log(err);
-            }
-            console.log("removed comments!");
+        await Comment.remove({});
+        console.log("removed comments");
+   }catch(err){
+        console.log(err);
+   }
+   //Remove all database items
+   // Plan.remove({}, function(err){
+   //      if(err){
+   //          console.log(err);
+   //      }
+
+   //      Comment.remove({}, function(err) {
+   //          if(err){
+   //              console.log(err);
+   //          }
+   //          console.log("removed comments!");
              //add a few plans
             /*data.forEach(function(seed){
                 Plan.create(seed, function(err, plan){
@@ -73,9 +82,17 @@ function seedDB(){
                             });
                     }
                 });
-            });*/
-        });
-    }); 
+    //         });*/
+    //     });
+    // }); 
+    try{
+        await User.remove({});
+        console.log("removed users");
+    }catch(err){
+        console.log(err);
+        console.log("seed js couldnt remove users");
+    }
+
     //add a few comments
 }
  

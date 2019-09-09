@@ -149,9 +149,9 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW ROUTE
 //shows more information about a single item
 //this should be declared after /new, because the id will think new is a variable if defined before other route
-router.get("/:id", function(req, res){
+router.get("/:id", async function(req, res){
     //find the plan
-    Plan.findById(req.params.id).populate("comments").exec(function(err, foundPlan){
+    Plan.findById(req.params.id).populate("comments").exec( async function(err, foundPlan){
        if(err || !foundPlan){
            req.flash("error", "Plan not found");
            res.redirect("back");
@@ -159,7 +159,16 @@ router.get("/:id", function(req, res){
        else{
            console.log(foundPlan);
            //render show template with that plan
-           res.render("plans/show", {plan: foundPlan});
+           try{
+                //var drawingThumbnail = await cloudinary.image(foundPlan.drawingId, { format: 'png' });  //this return img src 'path'
+                var drawingImage = await cloudinary.url(foundPlan.drawingId, { format: 'png' });  //this returns a url path
+                var drawingThumbnail = await cloudinary.url(foundPlan.drawingId, {format: 'png', width: 200, height: 250, crop: "fill"});  //this returns a url path
+           }catch(err){
+                console.log("DIDNT CONVERT DA IMAGE");
+           }
+           console.log(drawingThumbnail);
+           console.log(drawingImage);
+           res.render("plans/show", {plan: foundPlan, drawingThumbnail: drawingThumbnail, drawingImage: drawingImage});
        }
     });
 });
