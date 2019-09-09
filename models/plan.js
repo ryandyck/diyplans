@@ -9,8 +9,6 @@ var planSchema = new mongoose.Schema({
    type: String,  //woodwork, metal fab etc.
    
    drawing: String,  //pdf drawing (plan)
-   drawingThumb: String,
-   drawingDisplayImage: String,
    drawingId: String,  //used by cloudinary
    
    description: String, //description of the 
