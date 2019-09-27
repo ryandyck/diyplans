@@ -3,6 +3,8 @@
 //TODO LIST:  CHECK THIS WHEN COMING BACK TO PROJECT
    //fix download links that dont have data
    //make so that can delete a say dxf file without replacing it
+   //fix super long wait time when uploading g code files
+   //add a upload loading bar thing so just doesnt hang there
 var express = require("express");
 var app = express();  //to use express
 
