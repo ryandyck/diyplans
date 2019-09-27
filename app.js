@@ -1,6 +1,8 @@
 //to  update: this remove old version and installs new version
 //npm uninstall mongoose ; npm install --save mongoose@5.5.1
-
+//TODO LIST:  CHECK THIS WHEN COMING BACK TO PROJECT
+   //fix download links that dont have data
+   //make so that can delete a say dxf file without replacing it
 var express = require("express");
 var app = express();  //to use express
 

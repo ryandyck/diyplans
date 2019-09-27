@@ -19,11 +19,31 @@
                     <input type="file" id="image" name="image" accept="image/*">
                 </div>
                 <div class="form-group">
+                    <label for="image">Drawing</label>
+                    <input type="file" id="drawing" name="drawing" accept=".pdf">
+                </div>
+                <div class="form-group">
                     <input class="form-control" type="text" name="description" value="<%= plan.description %>">
                 </div>
                 <div class="form-group">
-                    <label for="image">Drawing</label>
+                    <label for="bom">Materials</label>
+                    <input type="file" id="bom" name="bom" accept=".xls, .xlsx, .xml, .doc, .docx, .docm, .txt">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <input type="file" id="notes" name="notes" accept=".xls, .xlsx, .xml, .doc, .docx, .docm, .txt">
+                </div>
+                <div class="form-group">
+                    <label for="drawing">Drawing</label>
                     <input type="file" id="drawing" name="drawing" accept=".pdf">
+                </div>
+                <div class="form-group">
+                    <label for="g_code">G Code</label>
+                    <input type="file" id="g_code" name="g_code" accept=".stl, .obj, .x3g, .3mf, .amf, .nc">
+                </div>
+                <div class="form-group">
+                    <label for="dxf_file">DXF File</label>
+                    <input type="file" id="dxf_file" name="dxf_file" accept=".dxf">
                 </div>
                 <div class="form-group">
                     <button class="brn btn-lg btn-primary btn-block">Submit!</button>
