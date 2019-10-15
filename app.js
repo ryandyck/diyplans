@@ -1,10 +1,14 @@
 //to  update: this remove old version and installs new version
 //npm uninstall mongoose ; npm install --save mongoose@5.5.1
 //TODO LIST:  CHECK THIS WHEN COMING BACK TO PROJECT
-   //fix download links that dont have data
+   //fix download links that dont have data -- to fix this, set them all into a zip file before uploading, then 
+        //when downloading will always at least need to have a drawing so the entire package will always download
    //make so that can delete a say dxf file without replacing it
    //fix super long wait time when uploading g code files
    //add a upload loading bar thing so just doesnt hang there
+   //add filters that interact with the search - not sure how best to do this
+   //display last entered filter / search into main page so that people know what they entered
+   
 var express = require("express");
 var app = express();  //to use express
 

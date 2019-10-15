@@ -15,10 +15,18 @@
                 <div class="card-body">
                     <img src= "<%= drawingThumbnail %>"> 
                     <a href="<%= plan.drawing %>" target="_blank" download>View/Download PDF</a>
-                    <a href="<%= plan.bom %>" target="_blank" download>Download BOM</a>  <!-- TODO THESE NEED TO ONLY DISPLAY WHEN THEY EXIST -->
-                    <a href="<%= plan.notes %>" target="_blank" download>Download Notes</a>
-                    <a href="<%= plan.gCode %>" target="_blank" download>Download G Code</a>
-                    <a href="<%= plan.dxf %>" target="_blank" download>Download DXF File</a>
+                    <% if(plan.bom){ %>
+                        <a href="<%= plan.bom %>" target="_blank" download>Download BOM</a>  <!-- TODO THESE NEED TO ONLY DISPLAY WHEN THEY EXIST -->
+                    <% } %>
+                    <% if(plan.notes){ %>
+                        <a href="<%= plan.notes %>" target="_blank" download>Download Notes</a>
+                    <% } %>
+                    <% if(plan.gCode){ %>
+                        <a href="<%= plan.gCode %>" target="_blank" download>Download G Code</a>
+                    <% } %>                   
+                    <% if(plan.dxf){ %>
+                        <a href="<%= plan.dxf %>" target="_blank" download>Download DXF File</a>
+                    <% } %>
 
                     <!-- <button onclick="viewPdf()">View PDF</button> -->
                     <h5 class="card-title"><%= plan.name %></h5>

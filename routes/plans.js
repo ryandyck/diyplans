@@ -27,50 +27,48 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 ///////////////////////////////////////////////////////////
-var filter;
 
 /////////////////
 //INDEX ROUTE
 //REST convention - this is where the data is displayed
-router.get("/", function(req, res){
+router.get("/", async function(req, res){
     var noMatch;
+    var allPlans;
 
-  /*  if(req.query.filter){
-        //variable regex (regular expression)
-        //const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        
-        const link_type = req.query.filter;
-        //search for names that match the fuzzy search from the regex and only display them
-        Plan.find({type: link_type}, function(err, allPlans){  //, type: link
-            if(err){
-                console.log(err);
-            }
-            else{
-                if(allPlans.length < 1){
-                    noMatch = "No plans were found";
-                }
-                res.render("plans/index", {plans: allPlans, noMatch: noMatch});
-            }
-        });
-    }*/
-
-    if(req.query.search){
+    if(req.query.search || req.query.filter){
         //variable regex (regular expression)
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         
-        //const link = req.query.type_link;
-        //search for names that match the fuzzy search from the regex and only display them
-        Plan.find({name: regex}, function(err, allPlans){  //, type: link
-            if(err){
-                console.log(err);
+        try{
+            if(req.query.search && req.query.filter != "no_filter"){
+                allPlans = await Plan.find({name: regex, type: req.query.filter});     
+            }
+            else if(req.query.filter != "no_filter"){
+                allPlans = await Plan.find({type: req.query.filter});     
             }
             else{
-                if(allPlans.length < 1){
-                    noMatch = "No plans were found";
-                }
-                res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+                allPlans = await Plan.find({name: regex});       
             }
-        });
+            if(allPlans.length < 1){
+                noMatch = "No plans were found";
+            }
+            res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+        }catch(err){
+            console.log(err);
+        }
+        //const link = req.query.type_link;
+        //search for names that match the fuzzy search from the regex and only display them
+        // Plan.find({name: regex}, function(err, allPlans){  //, type: link
+        //     if(err){
+        //         console.log(err);
+        //     }
+        //     else{
+        //         if(allPlans.length < 1){
+        //             noMatch = "No plans were found";
+        //         }
+        //         res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+        //     }
+        // });
     }
     else{
         //eval(require('locus'));
@@ -350,6 +348,7 @@ router.put("/:id", middleware.checkPlanOwnership, upload.fields([{name: 'image'}
             //will either update with old values or new updated values
             plan.name = req.body.name;
             plan.description = req.body.description;
+            plan.type = req.body.type;
             plan.save(); // saves the plan in the database (updates it)
             req.flash("success", "Updated Plan");
             //redirect somewhere

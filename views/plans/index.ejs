@@ -15,11 +15,24 @@
 
 <!-- adds some spacing on the sides -->
 <div class="container">
-    <form action="/plans" method="GET" class="">
+    <div class="form-group">
+        <select form="main_page_form" name="filter">
+            <option value="fabrication">Fabrication</option>
+            <option value="machining">Machining</option>
+            <option value="construction">Construction</option>
+            <option value="woodworking">Woodworking</option>
+            <option value="custom_projects">Custom Projects</option>
+            <option selected value="no_filter">No Filter</option>
+        </select>
+    </div>
+    <form id="main_page_form" action="/plans" method="GET" class="">
         <div class="form-group">
             <input type="text" name="search" placeholder="Plan search..." class="form-control">
-            <input type="submit" value="search" class="btn btn-default">
+            <!-- <input type="submit" value="search" class="btn btn-default"> -->
         <div>
+        <div class="form-group">
+            <button class="brn btn-lg btn-primary btn-block">Submit!</button>
+        </div>
     </form>
     <div class="row text-center">
         <div class="col-md-12">

@@ -5,15 +5,41 @@
         <h1 style="text-align: center;">Edit <%= plan.name %></h1>
         <div style="width: 30%; margin: 25px auto;">
             <!-- form with the /plans POST route -->
-            <form action="/plans/<%= plan._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <select form="edit_plan" name="type">
+                    <% if(plan.type == "fabrication"){ %>
+                        <option selected value="fabrication">Fabrication</option>
+                    <%} else {%>
+                        <option value="fabrication">Fabrication</option>
+                    <%}%>
+                    <% if(plan.type == "machining"){ %>
+                        <option selected value="machining">Machining</option>
+                    <%} else {%>
+                        <option value="machining">Machining</option>
+                    <%}%>
+                    <% if(plan.type == "construction"){ %>
+                        <option selected value="construction">Construction</option>
+                    <%} else {%>
+                        <option value="construction">Construction</option>
+                    <%}%>
+                    <% if(plan.type == "woodworking"){ %>
+                        <option selected value="woodworking">Woodworking</option>
+                    <%} else {%>
+                        <option value="woodworking">Woodworking</option>
+                    <%}%>
+                    <% if(plan.type == "custom_projects"){ %>
+                        <option selected value="custom_projects">Custom Projects</option>
+                    <%} else {%>
+                        <option value="custom_projects">Custom Projects</option>
+                    <%}%>
+                </select>
+            </div>
+            <form id="edit_plan" action="/plans/<%= plan._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <!-- used for grouping and adds space -->
                 <div class="form-group">
                 <!--text input, that sets the variable image, with background text being image url -->
                     <input class="form-control" type="text" name="name" value="<%= plan.name %>">
                 </div>
-                <!--<div class="form-group">
-                    <input class="form-control" type="number" name="plan[price]" value="<%= plan.price %>" min"0.01" step="0.01">
-                </div>-->
                 <div class="form-group">
                     <label for="image">Image</label>
                     <input type="file" id="image" name="image" accept="image/*">
