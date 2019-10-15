@@ -7,7 +7,7 @@
    //fix super long wait time when uploading g code files
    //add a upload loading bar thing so just doesnt hang there
    //add filters that interact with the search - not sure how best to do this
-   //display last entered filter / search into main page so that people know what they entered
+   //display last entered filter / search into main page so that people know what they entered (seems to be working)
    
 var express = require("express");
 var app = express();  //to use express
