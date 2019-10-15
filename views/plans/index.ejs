@@ -17,17 +17,21 @@
 <div class="container">
     <div class="form-group">
         <select form="main_page_form" name="filter">
-            <option value="fabrication">Fabrication</option>
-            <option value="machining">Machining</option>
-            <option value="construction">Construction</option>
-            <option value="woodworking">Woodworking</option>
-            <option value="custom_projects">Custom Projects</option>
-            <option selected value="no_filter">No Filter</option>
+            <option <% if(lastFilter == "fabrication"){ %> selected <% } %>     value="fabrication">Fabrication</option>
+            <option <% if(lastFilter == "machining"){ %> selected <% } %>       value="machining">Machining</option>
+            <option <% if(lastFilter == "construction"){ %> selected <% } %>    value="construction">Construction</option>
+            <option <% if(lastFilter == "woodworking"){ %> selected <% } %>     value="woodworking">Woodworking</option>
+            <option <% if(lastFilter == "custom_projects"){ %> selected <% } %> value="custom_projects">Custom Projects</option>
+            <option <% if(lastFilter == "no_filter"){ %> selected <% } %>       value="no_filter">Filter by Type</option>
         </select>
     </div>
     <form id="main_page_form" action="/plans" method="GET" class="">
         <div class="form-group">
-            <input type="text" name="search" placeholder="Plan search..." class="form-control">
+            <% if(lastSearch == "Plan Search...") { %>
+                <input type="text" name="search" placeholder="<%= lastSearch %>" last class="form-control">
+            <% } else{ %>
+                <input value="<%= lastSearch %>" type="text" name="search" last class="form-control">
+            <% } %>
             <!-- <input type="submit" value="search" class="btn btn-default"> -->
         <div>
         <div class="form-group">

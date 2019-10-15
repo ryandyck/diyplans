@@ -27,6 +27,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 ///////////////////////////////////////////////////////////
+//var lastFilter;
+//var lastSearch;
+lastFilter = "no_filter";
+lastSearch = "Plan Search...";
+
 
 /////////////////
 //INDEX ROUTE
@@ -34,25 +39,33 @@ cloudinary.config({
 router.get("/", async function(req, res){
     var noMatch;
     var allPlans;
-
+    //var lastFilter = "no_filter";
+    //var lastSearch = "Plan Search...";
+    
     if(req.query.search || req.query.filter){
         //variable regex (regular expression)
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         
         try{
             if(req.query.search && req.query.filter != "no_filter"){
-                allPlans = await Plan.find({name: regex, type: req.query.filter});     
+                allPlans = await Plan.find({name: regex, type: req.query.filter});
+                lastFilter = req.query.filter;  
+                lastSearch = req.query.search;   
             }
             else if(req.query.filter != "no_filter"){
                 allPlans = await Plan.find({type: req.query.filter});     
+                lastFilter = req.query.filter;
+                lastSearch = "Plan Search...";   
             }
             else{
-                allPlans = await Plan.find({name: regex});       
+                allPlans = await Plan.find({name: regex});
+                lastFilter = "no_filter";
+                lastSearch = req.query.search;      
             }
             if(allPlans.length < 1){
                 noMatch = "No plans were found";
             }
-            res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+            res.render("plans/index", {plans: allPlans, noMatch: noMatch, lastFilter: lastFilter, lastSearch: lastSearch});
         }catch(err){
             console.log(err);
         }
@@ -79,7 +92,9 @@ router.get("/", async function(req, res){
                 console.log(err);
             }
             else{
-                res.render("plans/index", {plans: allPlans, noMatch: noMatch});
+                lastFilter = "no_filter";
+                lastSearch = "Plan Search...";
+                res.render("plans/index", {plans: allPlans, noMatch: noMatch, lastFilter: lastFilter, lastSearch: lastSearch});
             }
         });
     }
