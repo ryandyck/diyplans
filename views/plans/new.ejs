@@ -2,14 +2,14 @@
 
 <!--<div class="container">-->
 <div class="row justify-content-center">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center mt-3 mb-2">
         <h1>Create a New Plan</h1>
     </div>
         <!--<div style="width: 30%; margin: 25px auto;">-->
     <div class="col-4 col-xs-12">
             <!-- form with the /plans POST route -->
             <div class="form-group">
-                <select form="new_plan" name="plan[type]">
+                <select id="index_form" class="form-control" form="new_plan" name="plan[type]">
                     <option value="fabrication">Fabrication</option>
                     <option value="machining">Machining</option>
                     <option value="construction">Construction</option>
@@ -21,40 +21,41 @@
                 <!-- used for grouping and adds space -->
                 <div class="form-group">
                 <!--text input, that sets the variable image, with background text being image url -->
-                    <input class="form-control" type="text" name="plan[name]" placeholder="name">
+                    <input class="form-control" type="text" name="plan[name]" placeholder="Title">
                 </div>
                 <!--<div class="form-group">
                     <input class="form-control" type="number" name="price" placeholder="price" min"0.01" step="0.01"> 
                 </div>-->
                 <div class="form-group">
-                    <label for="image">Image</label>
+                    <label class="custom-file-upload" for="image"><i class="fas fa-cloud-upload-alt"></i>Image</label>
                     <input type="file" id="image" name="image" accept="image/*" required>
-                </div>
-                <div class="form-group">
-                    <label for="drawing">Drawing</label>
+                <!-- </div> -->
+                <!-- <div class="form-group"> -->
+                    <label class="custom-file-upload" for="drawing"><i class="fas fa-cloud-upload-alt"></i>Drawing</label>
                     <input type="file" id="drawing" name="drawing" accept=".pdf" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="plan[description]" placeholder="description">
-                </div>
-                <div class="form-group">
-                    <label for="bom">Materials</label>
+                <!-- </div> -->
+                <!-- <div class="form-group"> -->
+                    <label class="custom-file-upload" for="bom"><i class="fas fa-cloud-upload-alt"></i>Materials</label>
                     <input type="file" id="bom" name="bom" accept=".xls, .xlsx, .xml, .doc, .docx, .docm, .txt">
-                </div>
-                <div class="form-group">
-                    <label for="notes">Notes</label>
+                <!-- </div> -->
+                <!-- <div class="form-group"> -->
+                    <label class="custom-file-upload" for="notes"><i class="fas fa-cloud-upload-alt"></i>Notes</label>
                     <input type="file" id="notes" name="notes" accept=".xls, .xlsx, .xml, .doc, .docx, .docm, .txt">
-                </div>
-                <div class="form-group">
-                    <label for="g_code">G Code</label>
+                <!-- </div> -->
+                <!-- <div class="form-group"> -->
+                    <label class="custom-file-upload" for="g_code"><i class="fas fa-cloud-upload-alt"></i>G Code</label>
                     <input type="file" id="g_code" name="g_code" accept=".stl, .obj, .x3g, .3mf, .amf, .nc">
-                </div>
-                <div class="form-group">
-                    <label for="dxf_file">DXF File</label>
+                <!-- </div> -->
+                <!-- <div class="form-group"> -->
+                    <label class="custom-file-upload" for="dxf_file"><i class="fas fa-cloud-upload-alt"></i>DXF File</label>
                     <input type="file" id="dxf_file" name="dxf_file" accept=".dxf">
                 </div>
                 <div class="form-group">
-                    <button class="brn btn-lg btn-primary btn-block">Submit!</button>
+                    <!-- <input class="form-control" type="text" name="plan[description]" placeholder="Description"> -->
+                    <textarea rows="10" class="form-control" type="text" name="plan[description]" placeholder="Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="brn btn-lg btn-primary">Submit!</button>
                 </div>
             </form>
             <a href="/plans">Back to Plans</a>

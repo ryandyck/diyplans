@@ -6,38 +6,38 @@
     </video>
     <div class="container text-white">
         <h1 class="display-4">DIY Plans</h1>
-        <p class="lead">Gunna build some sick stuff heck ya</p>
-        <hr class="my-4">
-        <p>Share some plans yo</p>
+        <p class="lead">CAD drawings available to download, free.</p>
+        <p>Upload/Share.  Download/Build.</p>
         <a class="btn btn-primary btn-lg" href="/plans/new">Add New Plan</a>
     </div>
 </div>
 
-<!-- adds some spacing on the sides -->
-<div class="container">
-    <div class="form-group">
-        <select form="main_page_form" name="filter">
-            <option <% if(lastFilter == "fabrication"){ %> selected <% } %>     value="fabrication">Fabrication</option>
-            <option <% if(lastFilter == "machining"){ %> selected <% } %>       value="machining">Machining</option>
-            <option <% if(lastFilter == "construction"){ %> selected <% } %>    value="construction">Construction</option>
-            <option <% if(lastFilter == "woodworking"){ %> selected <% } %>     value="woodworking">Woodworking</option>
-            <option <% if(lastFilter == "custom_projects"){ %> selected <% } %> value="custom_projects">Custom Projects</option>
-            <option <% if(lastFilter == "no_filter"){ %> selected <% } %>       value="no_filter">Filter by Type</option>
-        </select>
-    </div>
-    <form id="main_page_form" action="/plans" method="GET" class="">
-        <div class="form-group">
-            <% if(lastSearch == "Plan Search...") { %>
-                <input type="text" name="search" placeholder="<%= lastSearch %>" last class="form-control">
-            <% } else{ %>
-                <input value="<%= lastSearch %>" type="text" name="search" last class="form-control">
-            <% } %>
-            <!-- <input type="submit" value="search" class="btn btn-default"> -->
-        <div>
-        <div class="form-group">
-            <button class="brn btn-lg btn-primary btn-block">Submit!</button>
+    <!-- adds some spacing on the sides -->
+    <div class="container">
+        <div class="inline_css">
+            <select id="index_form" class="form-control" form="main_page_form" name="filter">
+                <option <% if(lastFilter == "fabrication"){ %> selected <% } %>     value="fabrication">Fabrication</option>
+                <option <% if(lastFilter == "machining"){ %> selected <% } %>       value="machining">Machining</option>
+                <option <% if(lastFilter == "construction"){ %> selected <% } %>    value="construction">Construction</option>
+                <option <% if(lastFilter == "woodworking"){ %> selected <% } %>     value="woodworking">Woodworking</option>
+                <option <% if(lastFilter == "custom_projects"){ %> selected <% } %> value="custom_projects">Custom Projects</option>
+                <option <% if(lastFilter == "no_filter"){ %> selected <% } %>       value="no_filter">Filter by Type</option>
+            </select>
         </div>
-    </form>
+        <form class="inline_css" id="main_page_form" action="/plans" method="GET">
+            <div class="form-group inline_css">
+                <% if(lastSearch == "Plan Search...") { %>
+                    <input type="text" name="search" placeholder="<%= lastSearch %>" class="form-control">
+                <% } else{ %>
+                    <input value="<%= lastSearch %>" type="text" name="search" class="form-control">
+                <% } %>
+                <!-- <input type="submit" value="search" class="btn btn-default"> -->
+            <div>
+            <div class="form-group inline_css">
+                <button class="brn btn-lg btn-primary">Submit!</button>
+            </div>
+        </form>
+    </div>
     <div class="row text-center">
         <div class="col-md-12">
             <% if(noMatch !== undefined) { %>
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= i.name %></h5>
                         <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                        <a href="/plans/<%= i._id %>" class="btn btn-primary">More Info</a>
+                        <a href="/plans/<%= i._id %>" class="btn btn-dark">More Info</a>
                     </div>
                 </div>
             </div>

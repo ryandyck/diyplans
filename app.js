@@ -9,6 +9,22 @@
    //add filters that interact with the search - not sure how best to do this
    //display last entered filter / search into main page so that people know what they entered (seems to be working)
    
+   //this is basically just turning into instructables...
+   //no it isnt, instructables you can download CNC files, and the instructions, but I have yet to find just a CAD drawing.
+   //I think this needs to become more specialized in order to be worth it.
+   //AutoCAD files
+
+   //features to add:
+   //featured plans page that are selected somehow.  Payment?  Or recently added
+   //reply to comments
+   //add a rating system
+   //display user image with username number of posts and comments, average rating, can display email maybe if wants to be contacted regarding work questions etc.
+   //download a zipped package with all docs, or individually?
+   //change the filter to be links to each section
+      //then can filter to other sections like matt mentions in his notes
+
+   
+
 var express = require("express");
 var app = express();  //to use express
 
