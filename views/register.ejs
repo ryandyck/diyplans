@@ -1,15 +1,39 @@
 <% include partials/header %>
 
-<h1>Sign up</h1>
+<!--<div class="container">-->
+<div class="row justify-content-center">
+    <div class="col-md-12 text-center mt-3 mb-2">
+        <h1>Sign Up</h1>
+    </div>
+        <!--<div style="width: 30%; margin: 25px auto;">-->
+    <div class="col-4 col-xs-12">
+		<form action="/register" method="post">
+            <!-- used for grouping and adds space -->
+            <div class="form-group">
+    			<input class="form-control" type="text" name="username" placeholder="username" required>
+            </div>
+            <div class="form-group">
+    			<input class="form-control" type="password" name="password" placeholder="password" required>
+            </div>
+            <div class="form-group">
+    			<input class="form-control" type="text" name="firstName" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+    			<input class="form-control" type="text" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+    			<input class="form-control" type="email" name="email" placeholder="email" required>
+            </div>
+            <div class="form-group">
+    			<input class="form-control" type="text" name="avatar" placeholder="avatar url">
+            </div>
+            <div class="form-group">
+                <button class="brn btn-lg btn-primary">Sign Up</button>
+            </div>
+        </form>
+        <a href="/plans">Back to Plans</a>
+    </div>
+</div>
 
-<form action="/register" method="post">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="text" name="firstName" placeholder="First Name">
-    <input type="text" name="lastName" placeholder="Last Name">
-    <input type="email" name="email" placeholder="email">
-    <input type="text" name="avatar" placeholder="avatar url">
-    <button>Sign Up</button>
-</form>
 
 <% include partials/footer %>

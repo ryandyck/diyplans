@@ -45,17 +45,13 @@ body {
 .inline_css{
   display: inline-block;
 }
-/*
-.button_css{
 
-}*/
+#index_search{
+  width:20em;
+}
 
-input[type="file"] {
-    display: none;
+#main_page_form{
+
 }
-.custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-}
+
+.button_right{}

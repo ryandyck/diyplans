@@ -12,31 +12,32 @@
     </div>
 </div>
 
-    <!-- adds some spacing on the sides -->
-    <div class="container">
-        <div class="inline_css">
-            <select id="index_form" class="form-control" form="main_page_form" name="filter">
-                <option <% if(lastFilter == "fabrication"){ %> selected <% } %>     value="fabrication">Fabrication</option>
-                <option <% if(lastFilter == "machining"){ %> selected <% } %>       value="machining">Machining</option>
-                <option <% if(lastFilter == "construction"){ %> selected <% } %>    value="construction">Construction</option>
-                <option <% if(lastFilter == "woodworking"){ %> selected <% } %>     value="woodworking">Woodworking</option>
-                <option <% if(lastFilter == "custom_projects"){ %> selected <% } %> value="custom_projects">Custom Projects</option>
-                <option <% if(lastFilter == "no_filter"){ %> selected <% } %>       value="no_filter">Filter by Type</option>
-            </select>
+<!-- adds some spacing on the sides -->
+<div class="container">
+    <div>
+    <div class="inline_css">
+        <select id="index_form" class="form-control" form="main_page_form" name="filter">
+            <option <% if(lastFilter == "fabrication"){ %> selected <% } %>     value="fabrication">Fabrication</option>
+            <option <% if(lastFilter == "machining"){ %> selected <% } %>       value="machining">Machining</option>
+            <option <% if(lastFilter == "construction"){ %> selected <% } %>    value="construction">Construction</option>
+            <option <% if(lastFilter == "woodworking"){ %> selected <% } %>     value="woodworking">Woodworking</option>
+            <option <% if(lastFilter == "custom_projects"){ %> selected <% } %> value="custom_projects">Custom Projects</option>
+            <option <% if(lastFilter == "no_filter"){ %> selected <% } %>       value="no_filter">Filter by Type</option>
+        </select>
+    </div>
+    <form class="inline_css" id="main_page_form" action="/plans" method="GET">
+        <div class="form-group index_search inline_css">
+            <% if(lastSearch == "Plan Search...") { %>
+                <input type="text" name="search" placeholder="<%= lastSearch %>" class="form-control">
+            <% } else{ %>
+                <input value="<%= lastSearch %>" type="text" name="search" class="form-control">
+            <% } %>
+            <!-- <input type="submit" value="search" class="btn btn-default"> -->
         </div>
-        <form class="inline_css" id="main_page_form" action="/plans" method="GET">
-            <div class="form-group inline_css">
-                <% if(lastSearch == "Plan Search...") { %>
-                    <input type="text" name="search" placeholder="<%= lastSearch %>" class="form-control">
-                <% } else{ %>
-                    <input value="<%= lastSearch %>" type="text" name="search" class="form-control">
-                <% } %>
-                <!-- <input type="submit" value="search" class="btn btn-default"> -->
-            <div>
-            <div class="form-group inline_css">
-                <button class="brn btn-lg btn-primary">Submit!</button>
-            </div>
-        </form>
+        <div class="form-group inline_css button_right">
+            <button class="brn btn-lg btn-primary">Submit!</button>
+        </div>
+    </form>
     </div>
     <div class="row text-center">
         <div class="col-md-12">
