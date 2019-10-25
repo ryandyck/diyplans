@@ -1,35 +1,25 @@
 <% include ../partials/header %>
 
-<div class="row">
-	<div class="col-md-4">
-		<h1><%= user.firstName + " " + user.lastName %></h1>
+<div class="container row mt-2">
+	<div class="col-md-6">
+		<h1>User: <%= user.username %></h1>
 		<div class="thumbnail">
-			<!--<img src="<%= user.avatar %>" alt="user profile image">-->
-			<div class="caption"><a href="mailto:<%= user.email %>"></a></div>
+			<% if(!user.avatar){ %>
+				<img class="avatar_css" src="/images/default-user-icon.jpg">
+			<% }else { %>
+				<img class="avatar_css" src="<%= user.avatar %>">
+			<% } %>
 		</div>
+		<a href="/forgot">Change Password</a>  <!-- only show this if current user -->
 	</div>
-	<div class="col-md-8">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	
-		<p><%= user.firstName %></p>
-		<p><%= user.lastName %></p>
-		<p><%= user.email %></p>
-		<p><%= user.avatar %></p>
-		<p><%= user.username %></p>
-		<h1>uploaded plans</h1>
+	<div class="col-md-6">
+		<h1>Uploaded Plans</h1>
 		<ul>
 			<% plans.forEach(function(plan){ %>
 				<li><a href="/plans/<%= plan.id %>"><%= plan.name %></a></li>
 			<% }); %>
 		</ul>
 	</div>
-
-	<a href="/forgot">Change Password</a>
 </div>
 
 <% include ../partials/footer %>
