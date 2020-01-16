@@ -5,25 +5,31 @@
             <div class="card mb-3">
                 <img src="<%= plan.image %>" class="card-img-top" alt="<%= plan.name %>">
                 <div class="card-body">
-                    <img src= "<%= drawingThumbnail %>"> 
+                    <!-- <button onclick="viewPdf()">View PDF</button> -->
+                    <h3 class="card-title"><%= plan.name %></h3>
+                    <!--<img src= "<%= drawingThumbnail %>"> -->
+                    <p>
                     <a href="<%= plan.drawing %>" target="_blank" download>View/Download PDF</a>
+                    </p>
+                    <p>
                     <% if(plan.bom){ %>
                         <a href="<%= plan.bom %>" target="_blank" download>Download BOM</a>  <!-- TODO THESE NEED TO ONLY DISPLAY WHEN THEY EXIST -->
                     <% } %>
+                    </p>
+                    <p>
                     <% if(plan.notes){ %>
                         <a href="<%= plan.notes %>" target="_blank" download>Download Notes</a>
                     <% } %>
-                    <% if(plan.gCode){ %>
+                    </p>
+                    <!--<% if(plan.gCode){ %>
                         <a href="<%= plan.gCode %>" target="_blank" download>Download G Code</a>
                     <% } %>                   
                     <% if(plan.dxf){ %>
                         <a href="<%= plan.dxf %>" target="_blank" download>Download DXF File</a>
-                    <% } %>
+                    <% } %>-->
 
-                    <!-- <button onclick="viewPdf()">View PDF</button> -->
-                    <h5 class="card-title"><%= plan.name %></h5>
                     <p class="card-text"><%= plan.description %> </p>
-                    <p><em>Submitted By <a href="/users/<%= plan.author.id %>"><%= plan.author.username %></a><%= moment(plan.createdAt).fromNow() %></em></p>
+                    <p><em>Submitted By <a href="/users/<%= plan.author.id %>"><%= plan.author.username %></a> <%= moment(plan.createdAt).fromNow() %></em></p>
                     <% if(currentUser && plan.author.id.equals(currentUser._id)){%>  <!-- every route has currentUser (app.js), but have to check if null first -->
                     <a class="btn btn-warning" href="/plans/<%= plan._id %>/edit">Edit</a>
                     <form class="delete-form" action="/plans/<%= plan._id %>?_method=DELETE" method="POST">
